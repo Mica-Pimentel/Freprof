@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TI&COMPUTAÇÃOO</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+
+<body>
+  <header>
+    <div id="logo">
+      <h1 class="title">TI & COMPUTAÇÃO</h1>
+      <h2 class="title">Ages</h2>
+    </div>
+  </header>
+
+  <section class="quiz-container">
+    <h1>Descubra sua área na TI!</h1>
+    <div id="quiz">
+      <div class="question" id="question1">
+        <p>1. O que você prefere fazer?</p>
+        <label><input type="radio" name="q1" value="dev"> Escrever códigos e criar softwares</label><br>
+        <label><input type="radio" name="q1" value="data"> Analisar grandes quantidades de dados</label><br>
+        <label><input type="radio" name="q1" value="sec"> Proteger sistemas contra invasões</label>
+      </div>
+
+      <div class="question" id="question2">
+        <p>2. O que te atrai mais?</p>
+        <label><input type="radio" name="q2" value="dev"> Desenvolvimento de aplicações</label><br>
+        <label><input type="radio" name="q2" value="data"> Descobrir padrões em dados</label><br>
+        <label><input type="radio" name="q2" value="sec"> Segurança de redes e sistemas</label>
+      </div>
+
+      <div class="question" id="question3">
+        <p>3. Como você prefere trabalhar?</p>
+        <label><input type="radio" name="q3" value="dev"> Criando soluções e escrevendo código</label><br>
+        <label><input type="radio" name="q3" value="data"> Analisando e interpretando dados</label><br>
+        <label><input type="radio" name="q3" value="sec"> Monitorando e prevenindo ataques</label>
+      </div>
+
+      <div class="question" id="question4">
+        <p>4. O que você valoriza mais em um trabalho?</p>
+        <label><input type="radio" name="q4" value="dev">
+          Criatividade para resolver problemas</label><br>
+        <label><input type="radio" name="q4" value="data">
+          Trabalhar com análises detalhadas e precisas</label><br>
+        <label><input type="radio" name="q4" value="sec">
+          Proteger pessoas e empresas contra ameaças</label>
+      </div>
+
+      <div class="question" id="question5">
+        <p>5. Qual dessas ferramentas/Linguagens você de interessa em aprender ou dominar?</p>
+        <label><input type="radio" name="q5" value="dev">JavaScript, Python, ou Java</label><br>
+        <label><input type="radio" name="q5" value="data">SQL,Excel, ou ferramentas de análise de dados</label><br>
+        <label><input type="radio" name="q5" value="sec">Ferramentas de segurança e monitoramento de redes</label>
+      </div>
+
+      <div class="question" id="question6">
+        <p>6. Como você gosta de abordar problemas?</p>
+        <label><input type="radio" name="q6" value="dev">Criando soluções inovadoras e otimisando processos</label><br>
+        <label><input type="radio" name="q6" value="data">investigando dados até encontara padrões ocultos</label><br>
+        <label><input type="radio" name="q6" value="sec">Identificando e eliminando vulnerabilidades de
+          segurança</label>
+      </div>
+
+      <div class="question" id="question7">
+        <p>7. Você prefere trabalhar em equipe ou individualmente? </p>
+        <label><input type="radio" name="q7" value="dev">Tranalhar em equipe para criar projetos
+          colaborativos</label><br>
+        <label><input type="radio" name="q7" value="data">Trabalhar de forma independente com análise de
+          dados</label><br>
+        <label><input type="radio" name="q7" value="sec">Tanto faz, desde que o trabalho esteja protegido e
+          seguro</label>
+      </div>
+
+      <div class="question" id="question8">
+        <p>8. Qual aspecto mais te atrai na área de tecnologia?</p>
+        <label><input type="radio" name="q8" value="dev">A possibilidade de contruir novas aplicaçôes e
+          sistemas</label><br>
+        <label><input type="radio" name="q8" value="data">A capacidadde de tomar decisôes baseadas em dados
+          concretos</label><br>
+        <label><input type="radio" name="q8" value="sec">Proteger sistemas e pessoas contra ameaças</label>
+      </div>
+
+      <div class="question" id="question9">
+        <p>9. Como você se sente em relação a novos desafios tecnologicos?</p>
+        <label><input type="radio" name="q9" value="dev">Gosto de explorar novas tecnologias e testas ideias
+          inovadoras</label><br>
+        <label><input type="radio" name="q9" value="data">Prefiro trabalhar com dados sólidos e comprovados para tomar
+          decisõs</label><br>
+        <label><input type="radio" name="q9" value="sec">Quero esta sempre atualizado sobre as últimas ameaças de
+          segurança</label>
+      </div>
+
+      <div class="question" id="question10">
+        <p>10. Em qual desses ambientes de trabalho você se imagina?</p>
+        <label><input type="radio" name="q10" value="dev">Desenvolvendo aplicaçôes e soluções em uma startup ou empresa
+          de software</label><br>
+        <label><input type="radio" name="q10" value="data">Trabalhando como analista de dados em uma grane
+          empresa</label><br>
+        <label><input type="radio" name="q10" value="sec">Monitoranto a segurança de sistemas em uma organização ou
+          consultora de TI</label>
+      </div>
+
+      <button id="submit" onclick="calculateResult()">Ver resultado</button>
+    </div>
+    <div id="result"></div>
+    <canvas id="myChart"></canvas>
+
+  </section>
+
+
+  <footer>
+    <h1 class="title">TI & COMPUTAÇÃO</h1>
+  </footer>
+  <script src="script.js"></script>
+
+</body>
+
+
+</html>
