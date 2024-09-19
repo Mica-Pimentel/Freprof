@@ -1,7 +1,8 @@
 function calculateResult() {
   let dev = 0,
     data = 0,
-    sec = 0
+    sec = 0,
+    gest = 0
 
   // Obter valores das respostas (mesmo processo descrito anteriormente)
   const q1 = document.querySelector('input[name="q1"]:checked')
@@ -23,14 +24,15 @@ function calculateResult() {
       if (answer.value === 'dev') dev++
       else if (answer.value === 'data') data++
       else if (answer.value === 'sec') sec++
+      else if (answer.value === 'gest') gest++
     }
   })
 
   // Gerar gráfico
-  createChart(dev, data, sec)
+  createChart(dev, data, sec, gest)
 }
 
-function createChart(dev, data, sec) {
+function createChart(dev, data, sec, gest) {
   const ctx = document.getElementById('myChart').getContext('2d')
 
   new Chart(ctx, {
@@ -39,14 +41,15 @@ function createChart(dev, data, sec) {
       labels: [
         'Desenvolvimento',
         'Análise de Dados',
-        'Segurança da Informação'
+        'Segurança da Informação',
+        'Gestão de TI'
       ],
       datasets: [
         {
           label: 'Interesse por área',
-          data: [dev, data, sec],
-          backgroundColor: ['#c1d04e', '#98A77A', ' #6e7ea6'],
-          borderColor: ['##c1d04e', '#98A77A', '#6e7ea6'],
+          data: [dev, data, sec, gest],
+          backgroundColor: ['#c1d04e', '#4e5b79', '#6e7ea6', '#f2e394'],
+          borderColor: ['#c1d04e', '#4e5b79', '#6e7ea6', '#f2e394'],
           borderWidth: 1
         }
       ]
@@ -61,15 +64,17 @@ function createChart(dev, data, sec) {
   })
   // Exibir resultado textual
   let resultText = ''
-  if (dev > data && dev > sec) {
+  if (dev > data && dev > sec && dev > gest) {
     resultText =
       'Você demostrou um grande interresse na area de Desenvolvimento de Software!'
-  } else if (data > dev && data > sec) {
+  } else if (data > dev && data > sec && data > gest) {
     resultText =
       'Você demostrou um grande interresse na área de Análise de Dados!'
-  } else if (sec > dev && sec > data) {
+  } else if (sec > dev && sec > data && sec > gest) {
     resultText =
       'Você demostrou um grande interresse na área de Segurança da Informação!'
+  } else if (gest > dev && gest > sec && gest > data) {
+    resultText = 'Você demostrou um grande interresse na área de Gestao de TI!'
   } else {
     resultText = 'Você tem um vasto mundo para descobir sua area na TI.'
   }
