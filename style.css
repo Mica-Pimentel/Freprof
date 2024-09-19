@@ -8,8 +8,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   text-align: justify;
-  height: 100vh;
+
   position: relative;
+  hyphens: auto;
 }
 /*header*/
 
@@ -18,6 +19,7 @@ header {
   top: 0;
   background-image: linear-gradient(to left, #c1d04e, #6e7ea6);
   padding: 0.8rem;
+  box-shadow: 0px 0.5px 10px #0000007a;
 }
 .title {
   color: rgb(213, 213, 213);
@@ -37,11 +39,12 @@ section.quiz-container {
 
 .quiz-container > h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .question {
   margin-bottom: 23px;
+  max-width: 400px;
 }
 .question > p {
   margin-bottom: 8px;
