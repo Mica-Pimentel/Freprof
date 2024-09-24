@@ -60,7 +60,7 @@ section.quiz-container {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #45a049;
+  background-color: #4b9c4f;
   color: white;
   border: none;
   border-radius: 5px;
@@ -68,7 +68,11 @@ button {
 }
 
 button:hover {
-  background-color: #c9db43;
+  background-color: #94db43;
+}
+
+#mostrar {
+  visibility: hidden;
 }
 
 #result {
@@ -76,20 +80,41 @@ button:hover {
   text-align: center;
   font-weight: bold;
 }
+
 canvas#myChart {
   width: 400px;
   height: 400px;
 }
 
+/*Fugir*/
+
+#fugir {
+  max-width: 400px;
+  height: 200px;
+  margin: 4rem auto;
+  font-size: 0.8rem;
+  position: relative;
+}
+
+div#btns {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.btn {
+  width: 6rem;
+}
+
 footer {
   padding: 0.8rem;
   background-image: linear-gradient(-60deg, #6e7ea6, #c1d04e);
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
 }
+
 footer p {
-  font-size: 0.5rem;
   color: #d5d5d5;
 }
 

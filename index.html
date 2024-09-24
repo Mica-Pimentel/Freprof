@@ -21,7 +21,7 @@
 
   <section class="quiz-container hifenizado">
     <h1>Descubra sua área na TI!</h1>
-    <div id="quiz">
+    <article id="quiz">
       <div class="question" id="question1">
         <p>1. O que você prefere fazer?</p>
         <label><input type="radio" name="q1" value="sec"> Proteger sistemas contra invasões</label><br>
@@ -123,12 +123,26 @@
       </div>
 
 
-      <button id="submit" onclick="calculateResult()">Ver resultado</button>
-    </div>
+      <button id="submit" onclick="calculateResult(),mostrar()">Ver resultado</button>
+    </article>
+  </section>
+
+  <section id="mostrar">
     <div id="result"></div>
     <canvas id="myChart"></canvas>
 
+
+    <article id="fugir">
+
+      <h2>Agora que você ja fez seu teste vocacional, venha fazer sua matricula na Ages!</h2>
+      <div id="btns"><button class="btn" onclick="sim()">SIM</button>
+        <button class="btn" onclick="desvia(this)" onmouseover="desvia(this)">NÃO</button>
+      </div>
+
+    </article>
   </section>
+
+
 
 
   <footer>

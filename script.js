@@ -81,3 +81,26 @@ function createChart(dev, data, sec, gest) {
 
   document.getElementById('result').textContent = resultText
 }
+
+function sim() {
+  alert(
+    'Que bom, ficaremos felizes em fazer parte da sua jornada para o sucesso!! :)'
+  )
+  // redireciona para um URL após clicar no SIM
+  location.href = 'https://www.ages.edu.br/graduacao/'
+}
+
+function desvia(btn) {
+  // btn declarado na função
+  btn.style.position = 'absolute'
+  btn.style.bottom = geraPosicao(10, 90)
+  btn.style.left = geraPosicao(10, 90)
+}
+
+function geraPosicao(min, max) {
+  return Math.random() * (max - min) + min + '%'
+}
+function mostrar() {
+  const mostrar = document.querySelector('#mostrar')
+  mostrar.style.visibility = 'visible'
+}
