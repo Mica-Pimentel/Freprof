@@ -1,3 +1,16 @@
+import {
+  GestureRecognizer,
+  FilesetResolver,
+  DrawingUtils
+} from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3'
+
+const demosSection = document.getElementById('demos')
+let gestureRecognizer: GestureRecognizer
+let runningMode = 'IMAGE'
+let enableWebcamButton: HTMLButtonElement
+let webcamRunning: Boolean = false
+const videoHeight = '360px'
+const videoWidth = '480px'
 const video = document.getElementById('webcam')
 const canvasElement = document.getElementById('output_canvas')
 const canvasCtx = canvasElement.getContext('2d')
