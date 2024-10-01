@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reconhecimento de mãos</title>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div id="logo">
+      <h1 class="title">TI & COMPUTAÇÃO</h1>
+      <h2 class="title">Ages</h2>
+    </div>
+    <div id="menu"></div>
+    <ul>
+      <li><a href="/index.html" class="nav">Teste</a></li>
+      <li><a href="#" class="nav">Rosto</a></li>
+    </ul>
+
+    </div>
+  </header>
+  <section>
+    <h2><br>Demo: Webcam continuous hand gesture detection</h2>
+    <p>Use your hand to make gestures in front of the camera to get gesture classification. </br>Click <b>enable
+        webcam</b> below and grant access to the webcam if prompted.</p>
+
+    <div id="liveView" class="videoView">
+      <button id="webcamButton" class="mdc-button mdc-button--raised">
+        <span class="mdc-button__ripple"></span>
+        <span class="mdc-button__label">ENABLE WEBCAM</span>
+      </button>
+      <div style="position: relative;">
+        <video id="webcam" autoplay playsinline></video>
+        <canvas class="output_canvas" id="output_canvas" width="1280" height="720"
+          style="position: absolute; left: 0px; top: 0px;"></canvas>
+        <p id='gesture_output' class="output">
+      </div>
+    </div>
+
+  </section>
+  <script src="script.js"></script>
+</body>
+
+</html>
