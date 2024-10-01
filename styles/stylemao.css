@@ -1,3 +1,4 @@
+@use '@material';
 video {
   clear: both;
   display: block;
@@ -47,6 +48,13 @@ section {
   margin: 0;
 }
 
+.highlighter {
+  background: rgba(0, 255, 0, 0.25);
+  border: 1px dashed #fff;
+  z-index: 1;
+  position: absolute;
+}
+
 .canvas {
   z-index: 1;
   position: absolute;
@@ -64,6 +72,9 @@ section {
   font-size: calc(8px + 1.2vw);
 }
 
+.detectOnClick img {
+  width: 45vw;
+}
 .output {
   display: none;
   width: 100%;
