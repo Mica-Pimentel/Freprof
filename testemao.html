@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reconhecimento de mãos</title>
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js"
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/stylemao.css">
 </head>
@@ -25,10 +27,7 @@
     </div>
   </header>
   <section>
-    <h2><br>Demo: Webcam continuous hand gesture detection</h2>
-    <p>Use your hand to make gestures in front of the camera to get gesture classification. </br>Click <b>enable
-        webcam</b> below and grant access to the webcam if prompted.</p>
-
+   
     <div id="liveView" class="videoView">
       <button id="webcamButton" class="mdc-button mdc-button--raised">
         <span class="mdc-button__ripple"></span>

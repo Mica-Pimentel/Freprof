@@ -104,7 +104,6 @@ function mostrar() {
   const mostrar = document.querySelector('#mostrar')
   mostrar.style.visibility = 'visible'
 }
-
 import {
   GestureRecognizer,
   FilesetResolver,
@@ -112,10 +111,10 @@ import {
 } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3'
 
 const demosSection = document.getElementById('demos')
-let gestureRecognizer: GestureRecognizer
-let runningMode = 'IMAGE'
-let enableWebcamButton: HTMLButtonElement
-let webcamRunning: Boolean = false
+let gestureRecognizer
+let runningMode = 'VIDEO' // Sempre vídeo
+let enableWebcamButton
+let webcamRunning = false
 const videoHeight = '360px'
 const videoWidth = '480px'
 const video = document.getElementById('webcam')
@@ -123,13 +122,12 @@ const canvasElement = document.getElementById('output_canvas')
 const canvasCtx = canvasElement.getContext('2d')
 const gestureOutput = document.getElementById('gesture_output')
 
-// Check if webcam access is supported.
+// Verifica se o acesso à webcam é suportado.
 function hasGetUserMedia() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
 }
 
-// If webcam supported, add event listener to button for when user
-// wants to activate it.
+// Se suportado, adiciona evento ao botão para ativar a webcam.
 if (hasGetUserMedia()) {
   enableWebcamButton = document.getElementById('webcamButton')
   enableWebcamButton.addEventListener('click', enableCam)
@@ -137,7 +135,7 @@ if (hasGetUserMedia()) {
   console.warn('getUserMedia() is not supported by your browser')
 }
 
-// Enable the live webcam view and start detection.
+// Ativa a visualização da webcam e inicia a detecção.
 function enableCam(event) {
   if (!gestureRecognizer) {
     alert('Please wait for gestureRecognizer to load')
@@ -152,12 +150,12 @@ function enableCam(event) {
     enableWebcamButton.innerText = 'DISABLE PREDICTIONS'
   }
 
-  // getUsermedia parameters.
+  // Parâmetros do getUserMedia.
   const constraints = {
     video: true
   }
 
-  // Activate the webcam stream.
+  // Ativa o stream da webcam.
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
     video.srcObject = stream
     video.addEventListener('loadeddata', predictWebcam)
@@ -168,9 +166,8 @@ let lastVideoTime = -1
 let results = undefined
 async function predictWebcam() {
   const webcamElement = document.getElementById('webcam')
-  // Now let's start detecting the stream.
-  if (runningMode === 'IMAGE') {
-    runningMode = 'VIDEO'
+  // Sempre usa o modo VIDEO
+  if (gestureRecognizer.getOptions && gestureRecognizer.getOptions().runningMode !== 'VIDEO') {
     await gestureRecognizer.setOptions({ runningMode: 'VIDEO' })
   }
   let nowInMs = Date.now()
@@ -205,7 +202,7 @@ async function predictWebcam() {
     }
   }
   canvasCtx.restore()
-  if (results.gestures.length > 0) {
+  if (results.gestures && results.gestures.length > 0) {
     gestureOutput.style.display = 'block'
     gestureOutput.style.width = videoWidth
     const categoryName = results.gestures[0][0].categoryName
@@ -217,9 +214,8 @@ async function predictWebcam() {
   } else {
     gestureOutput.style.display = 'none'
   }
-  // Call this function again to keep predicting when the browser is ready.
+  // Chama novamente para continuar prevendo.
   if (webcamRunning === true) {
     window.requestAnimationFrame(predictWebcam)
   }
 }
-

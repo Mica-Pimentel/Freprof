@@ -4,53 +4,48 @@ import {
   DrawingUtils
 } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3'
 
-const demosSection = document.getElementById('demos')
 let gestureRecognizer: GestureRecognizer
-let runningMode = 'IMAGE'
-let enableWebcamButton: HTMLButtonElement
-let webcamRunning: Boolean = false
+let runningMode = 'VIDEO'
+let enableWebcamButton = document.getElementById('webcamButton') as HTMLButtonElement
+let webcamRunning = false
 const videoHeight = '360px'
 const videoWidth = '480px'
-const video = document.getElementById('webcam')
-const canvasElement = document.getElementById('output_canvas')
+const video = document.getElementById('webcam') as HTMLVideoElement
+const canvasElement = document.getElementById('output_canvas') as HTMLCanvasElement
 const canvasCtx = canvasElement.getContext('2d')
-const gestureOutput = document.getElementById('gesture_output')
+const gestureOutput = document.getElementById('gesture_output') as HTMLParagraphElement
 
-// Check if webcam access is supported.
+// Carregar o modelo do GestureRecognizer
+async function loadGestureRecognizer() {
+  const vision = await FilesetResolver.forVisionTasks(
+    'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm'
+  )
+  gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
+    runningMode: 'VIDEO'
+  })
+}
+loadGestureRecognizer()
+
 function hasGetUserMedia() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
 }
 
-// If webcam supported, add event listener to button for when user
-// wants to activate it.
-if (hasGetUserMedia()) {
-  enableWebcamButton = document.getElementById('webcamButton')
+if (hasGetUserMedia() && enableWebcamButton) {
   enableWebcamButton.addEventListener('click', enableCam)
 } else {
   console.warn('getUserMedia() is not supported by your browser')
 }
 
-// Enable the live webcam view and start detection.
-function enableCam(event) {
+function enableCam(event: Event) {
   if (!gestureRecognizer) {
     alert('Please wait for gestureRecognizer to load')
     return
   }
 
-  if (webcamRunning === true) {
-    webcamRunning = false
-    enableWebcamButton.innerText = 'ENABLE PREDICTIONS'
-  } else {
-    webcamRunning = true
-    enableWebcamButton.innerText = 'DISABLE PREDICTIONS'
-  }
+  webcamRunning = !webcamRunning
+  enableWebcamButton.innerText = webcamRunning ? 'DISABLE PREDICTIONS' : 'ENABLE PREDICTIONS'
 
-  // getUsermedia parameters.
-  const constraints = {
-    video: true
-  }
-
-  // Activate the webcam stream.
+  const constraints = { video: true }
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
     video.srcObject = stream
     video.addEventListener('loadeddata', predictWebcam)
@@ -58,12 +53,10 @@ function enableCam(event) {
 }
 
 let lastVideoTime = -1
-let results = undefined
+let results: any = undefined
 async function predictWebcam() {
-  const webcamElement = document.getElementById('webcam')
-  // Now let's start detecting the stream.
-  if (runningMode === 'IMAGE') {
-    runningMode = 'VIDEO'
+  if (!gestureRecognizer) return
+  if (gestureRecognizer.getOptions().runningMode !== 'VIDEO') {
     await gestureRecognizer.setOptions({ runningMode: 'VIDEO' })
   }
   let nowInMs = Date.now()
@@ -77,28 +70,22 @@ async function predictWebcam() {
   const drawingUtils = new DrawingUtils(canvasCtx)
 
   canvasElement.style.height = videoHeight
-  webcamElement.style.height = videoHeight
+  video.style.height = videoHeight
   canvasElement.style.width = videoWidth
-  webcamElement.style.width = videoWidth
+  video.style.width = videoWidth
 
-  if (results.landmarks) {
+  if (results?.landmarks) {
     for (const landmarks of results.landmarks) {
       drawingUtils.drawConnectors(
         landmarks,
         GestureRecognizer.HAND_CONNECTIONS,
-        {
-          color: '#00FF00',
-          lineWidth: 5
-        }
+        { color: '#00FF00', lineWidth: 5 }
       )
-      drawingUtils.drawLandmarks(landmarks, {
-        color: '#FF0000',
-        lineWidth: 2
-      })
+      drawingUtils.drawLandmarks(landmarks, { color: '#FF0000', lineWidth: 2 })
     }
   }
   canvasCtx.restore()
-  if (results.gestures.length > 0) {
+  if (results?.gestures && results.gestures.length > 0) {
     gestureOutput.style.display = 'block'
     gestureOutput.style.width = videoWidth
     const categoryName = results.gestures[0][0].categoryName
@@ -110,7 +97,6 @@ async function predictWebcam() {
   } else {
     gestureOutput.style.display = 'none'
   }
-  // Call this function again to keep predicting when the browser is ready.
   if (webcamRunning === true) {
     window.requestAnimationFrame(predictWebcam)
   }
